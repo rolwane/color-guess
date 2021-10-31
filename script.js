@@ -13,6 +13,7 @@ generateColor();
 function generateOptions() {
   const containerBalls = document.querySelector('#container-balls');
   const ordem = random(0, 6);
+  containerBalls.innerHTML = '';
   for (let i = 0; i < 6; i += 1) {
     if (ordem === i) {
       const ball = document.createElement('span');
@@ -44,4 +45,11 @@ function checkAnswer(e) {
   }
 }
 
+function resetGame() {
+  document.querySelector('#answer').innerText = 'Escolha uma cor';
+  generateColor();
+  generateOptions();
+}
+
 document.querySelector('#container-balls').addEventListener('click', checkAnswer);
+document.querySelector('#reset-game').addEventListener('click', resetGame);
