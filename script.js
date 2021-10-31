@@ -39,6 +39,7 @@ function checkAnswer(e) {
     const elementColor = element.style.backgroundColor;
     if (color === elementColor) {
       answer.innerText = 'Acertou!';
+      addScore();
     } else {
       answer.innerText = 'Errou! Tente novamente!';
     }
@@ -49,6 +50,11 @@ function resetGame() {
   document.querySelector('#answer').innerText = 'Escolha uma cor';
   generateColor();
   generateOptions();
+}
+
+function addScore() {
+  const score = parseInt(document.querySelector('#score').innerText);
+  document.querySelector('#score').innerText = score + 3;
 }
 
 document.querySelector('#container-balls').addEventListener('click', checkAnswer);
