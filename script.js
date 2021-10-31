@@ -1,23 +1,26 @@
 function random(min, max) {
-  return Math.floor(Math.random() * (max-min) + min);
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
+const rgbColor = document.querySelector('#rgb-color');
+
 function generateColor() {
-  const pai = document.querySelector('#rgb-color');
-  pai.innerText = `rgb(${random(0, 256)}, ${random(0, 256)}, ${random(0, 256)})`;
+  rgbColor.innerText = `rgb(${random(0, 256)}, ${random(0, 256)}, ${random(0, 256)})`;
 }
+
+generateColor();
 
 function generateOptions() {
   const containerBalls = document.querySelector('#container-balls');
-  let ordem = random(0, 6)
-  for (let i = 0; i < 6; i++) {
-    if(ordem === i) {
-      let ball = document.createElement('span');
+  const ordem = random(0, 6);
+  for (let i = 0; i < 6; i += 1) {
+    if (ordem === i) {
+      const ball = document.createElement('span');
       ball.classList.add('ball');
-      ball.style.backgroundColor = document.querySelector('#rgb-color').innerText;
+      ball.style.backgroundColor = rgbColor.innerText;
       containerBalls.appendChild(ball);
     } else {
-      let ball = document.createElement('span');
+      const ball = document.createElement('span');
       ball.classList.add('ball');
       ball.style.backgroundColor = `rgb(${random(0, 256)}, ${random(0, 256)}, ${random(0, 256)})`;
       containerBalls.appendChild(ball);
@@ -25,5 +28,20 @@ function generateOptions() {
   }
 }
 
-generateColor();
 generateOptions();
+
+function checkAnswer(e) {
+  const color = rgbColor.innerText;
+  const answer = document.querySelector('#answer');
+  const element = e.target;
+  if (element.id !== 'container-balls') {
+    const elementColor = element.style.backgroundColor;
+    if (color === elementColor) {
+      answer.innerText = 'Acertou!';
+    } else {
+      answer.innerText = 'Errou! Tente novamente!';
+    }
+  }
+}
+
+document.querySelector('#container-balls').addEventListener('click', checkAnswer);
