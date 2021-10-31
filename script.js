@@ -31,6 +31,11 @@ function generateOptions() {
 
 generateOptions();
 
+function addScore() {
+  const score = parseInt(document.querySelector('#score').innerText, 10);
+  document.querySelector('#score').innerText = score + 3;
+}
+
 function checkAnswer(e) {
   const color = rgbColor.innerText;
   const answer = document.querySelector('#answer');
@@ -50,11 +55,6 @@ function resetGame() {
   document.querySelector('#answer').innerText = 'Escolha uma cor';
   generateColor();
   generateOptions();
-}
-
-function addScore() {
-  const score = parseInt(document.querySelector('#score').innerText);
-  document.querySelector('#score').innerText = score + 3;
 }
 
 document.querySelector('#container-balls').addEventListener('click', checkAnswer);
